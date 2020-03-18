@@ -1,9 +1,15 @@
 # Nameko Sematext Logger
 
+## Get Started
+
+```
+pip install nameko-sematext-logger
+```
+
 ## config.yaml
 
 ```
-SEMATEXT: 
+SEMATEXT:
     KEY: ${SEMATEXT_KEY:<DEFAULT_KEY_HERE>}
     URL: <URL_HSER>
     PORT: 514
