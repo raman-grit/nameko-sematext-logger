@@ -31,3 +31,9 @@ class GreetingService:
         self.sematext_logger.error('This is an error log')
         ...
 ```
+
+## Run the service
+
+```
+nameko run service_file --config config.yaml
+```
