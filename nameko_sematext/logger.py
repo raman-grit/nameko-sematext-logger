@@ -10,14 +10,16 @@ class Sematext(DependencyProvider):
         self.tracking_url = self.sematext_config.get('URL', None)
         self.tracking_port = self.sematext_config.get('PORT', None)
 
+        handler = logging.handlers.SysLogHandler(address=(self.tracking_url, self.tracking_port))
+        formater = logging.Formatter("{}:%(message)s".format(self.tracking_key))
+        handler.setFormatter(formater)
+        self.logger = logging.getLogger("sematext")
+        self.logger.setLevel(logging.DEBUG)
+        self.logger.addHandler(handler)
+
     def get_dependency(self, worker_ctx):
         
         def custom_logger():
-            handler = logging.handlers.SysLogHandler(address=(self.tracking_url, self.tracking_port))
-            formater = logging.Formatter("{}:%(message)s".format(self.tracking_key))
-            handler.setFormatter(formater)
-            logger = logging.getLogger("sematext")
-            logger.addHandler(handler)
-            return logger
+            return self.logger
 
         return custom_logger()
